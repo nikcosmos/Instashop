@@ -25,3 +25,5 @@ Use sprite on HTML
     <use xlink:href='@img/icons/icons.svg#svg-{NAME-SVG}'></use>
 </svg>
 ```
+
+mnemonics
