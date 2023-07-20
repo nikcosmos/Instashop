@@ -1,5 +1,6 @@
+import { loadInfoComplete, loadInfoStart, menuClose } from './modules.js';
+
 import { $localApi } from './api.js';
-import { menuClose } from './modules.js';
 
 const langListEl = document.getElementById('langList');
 
@@ -23,7 +24,7 @@ langListEl.addEventListener('click', onChangeLang);
 async function onChangeLang(el) {
    if (el.target.classList.contains('burger-list__btn')) {
       menuClose();
-      document.documentElement.classList.add('load-info');
+      loadInfoStart();
       await fetchTranslations(el.target.dataset.lang);
       finalSetLangActions(el.target.dataset.lang);
    }
@@ -69,7 +70,5 @@ function finalSetLangActions(lang) {
    document.documentElement.setAttribute('lang', lang);
    window.localStorage.setItem('lang', lang);
    document.dispatchEvent(new Event('lang-load'));
-   if (document.documentElement.classList.contains('load-info')) {
-      document.documentElement.classList.remove('load-info');
-   }
+   loadInfoComplete();
 }
