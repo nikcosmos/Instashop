@@ -1,0 +1,62 @@
+:root {
+   //Fonts
+   --font-main: 'Inter';
+   --font-secondary: 'Montserrat';
+   // Utils Color
+   --white: #ffffff;
+   --black: #000000;
+   // Main Background
+   --bg-body: #1c241d;
+   --bg-wrapper: linear-gradient(225deg, #1c241d 0%, #1b201c 100%);
+   --bg-loader: linear-gradient(225deg, #1c241d 0%, #1b201c 100%);
+   // Burger
+   --burger-icon-color: #ffffff;
+   --bg-burger: linear-gradient(135deg, #3a3b3b 0%, #444845 100%);
+   // Screen
+   --bg-screen: linear-gradient(135deg, #3a3b3b 0%, rgba(68, 72, 69, 0) 100%);
+   --bg-img: radial-gradient(
+      75.06% 73.04% at 44.23% 38.37%,
+      rgba(251, 0, 255, 0.1) 0%,
+      rgba(0, 143, 255, 0.09) 100%
+   );
+   --bg-img-size: 320px;
+   --border-radius-screen: 16px;
+   --border-color-screen: #333333;
+   // Tabs
+   --bg-tabs-list: linear-gradient(135deg, #3a3b3b 0%, #444845 100%);
+   --bg-tab-active: linear-gradient(125deg, #fb00ff 0%, #b274e8 100%);
+   --text-tabs: #dddddd;
+   --text-tabs-active: #ffffff;
+   --border-radius-tabs: 12px;
+   // Pagination
+   --bg-pagination: rgba(58, 59, 59, 1);
+   --bg-pagination-active: rgba(255, 255, 255, 0.7);
+   //Typography
+   --text-base: #bdbdbd;
+   --text-gradient: linear-gradient(
+      135deg,
+      rgb(255, 255, 255),
+      rgba(255, 255, 255, 0.5)
+   );
+   //Buttons
+   --bg-button: linear-gradient(125deg, #fb00ff 0%, #b274e8 100%);
+   --text-button: #ffffff;
+   //Label Color
+   --text-label: #ffffff;
+   --bg-label: linear-gradient(135deg, #b274e8 0%, #520190 100%);
+   // quote
+   --quote-color: #b274e8;
+   //Form
+   --bg-input: linear-gradient(135deg, #3a3b3b 0%, rgba(68, 72, 69, 0.63) 100%);
+   --text-input: #ffffff;
+   // Loader
+   --sity-loader-color-1: #fb00ff;
+   --sity-loader-color-2: #b274e8;
+   --lazy-loader-color: #ffffff;
+   --lazy-loader-size: 30px;
+   // Transiton
+   --cb: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Fonts Config
+$fontSize: 14px;
