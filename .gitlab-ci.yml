@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy_master:
+  stage: deploy
+  tags:
+    - ops
+
+  script:
+    ## Start deploy operations
+    - bash /opt/deploy/deploy-instashop.sh
+
+  environment: production
+  only:
+    - main
