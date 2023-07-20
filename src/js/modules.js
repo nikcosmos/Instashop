@@ -61,3 +61,12 @@ export function initLazyLoad() {
       use_native: true,
    });
 }
+
+// Load info
+
+export function loadInfoStart() {
+   document.documentElement.classList.add('load-info');
+}
+export function loadInfoComplete() {
+   document.documentElement.classList.remove('load-info');
+}
