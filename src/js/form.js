@@ -1,5 +1,7 @@
-import { $formApi, SITE_ID } from './api.js';
 import { loadInfoComplete, loadInfoStart } from './modules.js';
+
+import { $formApi } from './api.js';
+import { SITE_ID } from './config.js';
 
 const formScreen = document.getElementById('formScreen');
 const contactForm = document.getElementById('contactForm');

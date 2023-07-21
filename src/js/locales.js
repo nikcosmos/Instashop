@@ -53,7 +53,7 @@ function renderTranslationsList(list) {
       })
       .join('');
 
-   langListEl.insertAdjacentHTML('afterbegin', htmlList);
+   langListEl.innerHTML = htmlList;
 }
 
 function setLang(local) {

@@ -32,7 +32,7 @@ export const mainSlider = new Swiper('#mainSlider', {
    slidePrevClass: 'main-prev',
    direction: 'vertical',
    spaceBetween: 0,
-   initialSlide: 7,
+   initialSlide: 0,
    slidesPerView: 1,
    translate: 0,
    speed: 1200,
