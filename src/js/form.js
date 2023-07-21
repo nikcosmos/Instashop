@@ -4,15 +4,6 @@ import { loadInfoComplete, loadInfoStart } from './modules.js';
 const formScreen = document.getElementById('formScreen');
 const contactForm = document.getElementById('contactForm');
 const phoneInputEl = contactForm?.querySelector('[name="phone"]');
-const defaultBody = {
-   site_id: SITE_ID,
-   lang: window.localStorage.getItem('lang'),
-   type: 'feedback',
-   name: '',
-   email: '',
-   phone: '',
-   notes: '',
-};
 
 contactForm?.addEventListener('submit', onSubmitForm);
 contactForm?.addEventListener('input', () => {
@@ -36,6 +27,15 @@ async function onSubmitForm(el) {
 }
 
 async function fetchForm(formData) {
+   const defaultBody = {
+      site_id: SITE_ID,
+      lang: window.localStorage.getItem('lang'),
+      type: 'feedback',
+      name: '',
+      email: '',
+      phone: '',
+      notes: '',
+   };
    return $formApi.post('', { ...defaultBody, ...formData });
 }
 
