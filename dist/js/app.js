@@ -3810,6 +3810,8 @@
         function loadInfoComplete() {
             document.documentElement.classList.remove("load-info");
         }
+        const API_URL = "https://api.cardoapi.com/api/v2";
+        const SITE_ID = "424936";
         function bind(fn, thisArg) {
             return function wrap() {
                 return fn.apply(thisArg, arguments);
@@ -5347,8 +5349,6 @@
         axios.HttpStatusCode = helpers_HttpStatusCode;
         axios.default = axios;
         const lib_axios = axios;
-        const API_URL = "https://api.cardoapi.com/api/v2";
-        const SITE_ID = "424936";
         const $localApi = lib_axios.create({
             baseURL: API_URL,
             params: {
@@ -5366,7 +5366,7 @@
         async function initTranslation() {
             const setedLang = window?.localStorage.getItem("lang");
             if (setedLang) {
-                fetchTranslationsList();
+                fetchTranslationsList(setedLang);
                 await fetchTranslations(setedLang);
                 finalSetLangActions(setedLang);
             } else {
@@ -5377,10 +5377,11 @@
         }
         langListEl.addEventListener("click", onChangeLang);
         async function onChangeLang(el) {
-            if (el.target.classList.contains("burger-list__btn")) {
+            if (el.target.classList.contains("language-block__item")) {
                 menuClose();
                 loadInfoStart();
                 await fetchTranslations(el.target.dataset.lang);
+                addActiveLang(el.target.dataset.lang);
                 finalSetLangActions(el.target.dataset.lang);
             }
         }
@@ -5391,15 +5392,17 @@
                 }
             }).then((({data}) => setLang(data, langVal)));
         }
-        async function fetchTranslationsList() {
+        async function fetchTranslationsList(setedLang) {
             return $localApi("/site/one").then((({data}) => {
                 renderTranslationsList(data.langs_interface);
+                const setLang = setedLang || data.lang_default;
+                addActiveLang(setLang);
                 return data.lang_default;
             }));
         }
         function renderTranslationsList(list) {
-            const htmlList = list.map((item => `<button data-lang='${item}' type='button' class="burger-list__btn">${item}</button>`)).join("");
-            langListEl.insertAdjacentHTML("afterbegin", htmlList);
+            const htmlList = list.map((item => `<button data-lang='${item}' type="button" class="language-block__item"><span>${item}</span></button>`)).join("");
+            langListEl.innerHTML = htmlList;
         }
         function setLang(local) {
             const allDataEl = document.querySelectorAll("[data-lg]");
@@ -5417,22 +5420,21 @@
             document.dispatchEvent(new Event("lang-load"));
             loadInfoComplete();
         }
+        function addActiveLang(setedLang) {
+            const listBtn = [ ...langListEl.children ];
+            listBtn.forEach((item => {
+                if (item.dataset.lang === setedLang) item.classList.add("_active"); else item.classList.remove("_active");
+            }));
+        }
         const formScreen = document.getElementById("formScreen");
         const contactForm = document.getElementById("contactForm");
         const phoneInputEl = contactForm?.querySelector('[name="phone"]');
-        const defaultBody = {
-            site_id: SITE_ID,
-            lang: window.localStorage.getItem("lang"),
-            type: "feedback",
-            name: "",
-            email: "",
-            phone: "",
-            notes: ""
-        };
+        const tryAgainEl = document.getElementById("tryAgainBtn");
         contactForm?.addEventListener("submit", onSubmitForm);
         contactForm?.addEventListener("input", (() => {
             [ ...contactForm.children ].forEach((input => removeInputError(input)));
         }));
+        tryAgainEl?.addEventListener("click", returnForm);
         async function onSubmitForm(el) {
             el.preventDefault();
             const formData = getFormData([ ...el.target.children ]);
@@ -5447,6 +5449,15 @@
             }
         }
         async function fetchForm(formData) {
+            const defaultBody = {
+                site_id: SITE_ID,
+                lang: window.localStorage.getItem("lang"),
+                type: "feedback",
+                name: "",
+                email: "",
+                phone: "",
+                notes: ""
+            };
             return $formApi.post("", {
                 ...defaultBody,
                 ...formData
@@ -5496,6 +5507,9 @@
         function dispatchFormStatus(status) {
             if (status === "success") formScreen.classList.add("success-form");
             if (status === "error") formScreen.classList.add("error-form");
+        }
+        function returnForm() {
+            formScreen.classList.remove("error-form");
         }
         addLoadedClass();
         initLazyLoad();
