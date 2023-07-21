@@ -24,6 +24,10 @@
       .main-anim .first-screen & {
          transition: opacity 0.7s var(--cb) 0s, transform 0.7s var(--cb) 0s;
       }
+      .success-form &,
+      .error-form & {
+         display: none;
+      }
    }
 
    &__descr {
@@ -36,6 +40,10 @@
       }
       .main-anim .first-screen & {
          transition: opacity 0.7s var(--cb) 0s, transform 0.7s var(--cb) 0s;
+      }
+      .success-form &,
+      .error-form & {
+         display: none;
       }
    }
 
@@ -193,20 +201,12 @@
       resize: none;
    }
 
-   &__form-success {
-      display: none;
-      .success-form & {
-         display: block;
-      }
+   &.success-form .form-status.form-status_success {
+      display: flex;
    }
-
-   &__form-error {
-      display: none;
-      .error-form & {
-         display: block;
-      }
+   &.error-form .form-status.form-status_error {
+      display: flex;
    }
-
    // labels
    &__label {
       will-change: transform;
@@ -236,6 +236,65 @@
       }
    }
 }
+
+.form-success {
+   &__icon {
+      display: block;
+      margin: 0px auto 20px;
+      width: 36px;
+      height: 36px;
+      stroke: rgba(255, 255, 255, 0.5);
+      stroke-width: 2px;
+   }
+
+   &__text {
+      font-family: var(--font-secondary);
+      font-size: 18px;
+      @extend %textLg;
+   }
+}
+
+.form-status {
+   flex: 1 1 auto;
+   display: none;
+   flex-direction: column;
+   gap: 20px;
+   &__content {
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+   }
+
+   &__icon {
+      width: 50px;
+      height: 50px;
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.5);
+   }
+
+   &__text {
+      font-family: var(--font-secondary);
+      font-size: 18px;
+      @extend %textLg;
+      text-align: center;
+   }
+
+   &__button {
+      @extend %btn;
+   }
+}
+
+.form-error {
+   &__icon {
+   }
+
+   &__text {
+   }
+}
+
 //FeenBackScreen========================================================================================================================================================
 .feedback-screen {
    height: 100%;

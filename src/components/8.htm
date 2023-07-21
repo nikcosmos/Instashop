@@ -7,7 +7,22 @@
         <input data-lg-placeholder='@@tab-screen8-phone' class='screen-temp__input' type="tel" name="phone" placeholder='Phone'>
         <textarea data-lg-placeholder='@@tab-screen8-notes' class='screen-temp__textarea' name="notes" placeholder='Notes'></textarea>
     </form>
-    <button data-lg="fix-button" form='contactForm' type="submit" class="screen-temp__button">APPLY</button>
-    <div class="screen-temp__form-success">Форма отправлена</div>
-    <div class="screen-temp__form-error">Случилась ошибка попробуй позже</div>
+    <button data-lg="apply-button" form='contactForm' type="submit" class="screen-temp__button"></button>
+    <div class="form-status form-status_success">
+        <div class="form-status__content">
+            <svg class='form-status__icon'>
+                <use xlink:href='@img/icons/icons.svg#svg-ok'></use>
+            </svg>
+            <p data-lg="form-text-success" class="form-status__text"></p>
+        </div>
+    </div>
+    <div class="form-status form-status_error">
+        <div class="form-status__content">
+            <svg class='form-status__icon'>
+                <use xlink:href='@img/icons/icons.svg#svg-error'></use>
+            </svg>
+            <p data-lg="form-text-error" class="form-status__text"></p>
+        </div>
+        <button data-lg="try-again-btn" id='tryAgainBtn' type="button" class="form-status__button"></button>
+    </div>
 </div>

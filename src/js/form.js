@@ -4,11 +4,13 @@ import { loadInfoComplete, loadInfoStart } from './modules.js';
 const formScreen = document.getElementById('formScreen');
 const contactForm = document.getElementById('contactForm');
 const phoneInputEl = contactForm?.querySelector('[name="phone"]');
+const tryAgainEl = document.getElementById('tryAgainBtn');
 
 contactForm?.addEventListener('submit', onSubmitForm);
 contactForm?.addEventListener('input', () => {
    [...contactForm.children].forEach((input) => removeInputError(input));
 });
+tryAgainEl?.addEventListener('click', returnForm);
 
 async function onSubmitForm(el) {
    el.preventDefault();
@@ -92,4 +94,8 @@ function removeInputError(el) {
 function dispatchFormStatus(status) {
    if (status === 'success') formScreen.classList.add('success-form');
    if (status === 'error') formScreen.classList.add('error-form');
+}
+
+function returnForm() {
+   formScreen.classList.remove('error-form');
 }
