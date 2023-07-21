@@ -9,7 +9,7 @@ initTranslation();
 async function initTranslation() {
    const setedLang = window?.localStorage.getItem('lang');
    if (setedLang) {
-      fetchTranslationsList();
+      fetchTranslationsList(setedLang);
       await fetchTranslations(setedLang);
       finalSetLangActions(setedLang);
    } else {
@@ -22,10 +22,11 @@ async function initTranslation() {
 langListEl.addEventListener('click', onChangeLang);
 
 async function onChangeLang(el) {
-   if (el.target.classList.contains('burger-list__btn')) {
+   if (el.target.classList.contains('language-block__item')) {
       menuClose();
       loadInfoStart();
       await fetchTranslations(el.target.dataset.lang);
+      addActiveLang(el.target.dataset.lang);
       finalSetLangActions(el.target.dataset.lang);
    }
 }
@@ -36,9 +37,11 @@ async function fetchTranslations(langVal) {
    }).then(({ data }) => setLang(data, langVal));
 }
 
-async function fetchTranslationsList() {
+async function fetchTranslationsList(setedLang) {
    return $localApi('/site/one').then(({ data }) => {
       renderTranslationsList(data.langs_interface);
+      const setLang = setedLang || data.lang_default;
+      addActiveLang(setLang);
       return data.lang_default;
    });
 }
@@ -46,11 +49,11 @@ async function fetchTranslationsList() {
 function renderTranslationsList(list) {
    const htmlList = list
       .map((item) => {
-         return `<button data-lang='${item}' type='button' class="burger-list__btn">${item}</button>`;
+         return `<button data-lang='${item}' type="button" class="language-block__item"><span>${item}</span></button>`;
       })
       .join('');
 
-   langListEl.insertAdjacentHTML('afterbegin', htmlList);
+   langListEl.innerHTML = htmlList;
 }
 
 function setLang(local) {
@@ -71,4 +74,15 @@ function finalSetLangActions(lang) {
    window.localStorage.setItem('lang', lang);
    document.dispatchEvent(new Event('lang-load'));
    loadInfoComplete();
+}
+
+function addActiveLang(setedLang) {
+   const listBtn = [...langListEl.children];
+   listBtn.forEach((item) => {
+      if (item.dataset.lang === setedLang) {
+         item.classList.add('_active');
+      } else {
+         item.classList.remove('_active');
+      }
+   });
 }
