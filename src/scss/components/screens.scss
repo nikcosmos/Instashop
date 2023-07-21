@@ -81,17 +81,20 @@
          top: 0;
          left: 0;
       }
+   }
+   // Iframe
+   &__iframe {
+      margin: auto -20px;
+      flex: 1 1 auto;
+      position: relative;
       iframe {
          position: absolute;
          width: 100%;
-         aspect-ratio: 283 / 150;
+         aspect-ratio: 1.9 / 1;
          top: 50%;
          transform: translate(0px, -50%);
-         left: 0;
+         left: 0px;
          overflow: hidden;
-         .unity-mobile {
-            overflow: hidden;
-         }
       }
    }
    // Slider
