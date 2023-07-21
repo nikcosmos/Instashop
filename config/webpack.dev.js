@@ -48,7 +48,7 @@ const config = {
    devServer: {
       historyApiFallback: true,
       static: paths.build,
-      open: true,
+      open: ['/influencers.html'],
       compress: true,
       port: 'auto',
       hot: true,
