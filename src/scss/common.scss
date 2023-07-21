@@ -1,6 +1,6 @@
 //Typography========================================================================================================================================================
 %textLg {
-   background: var(--text-gradient);
+   background: var(--gradient-text-color);
    background-clip: text;
    text-fill-color: transparent;
    -webkit-background-clip: text;
@@ -8,43 +8,43 @@
 }
 //SlideBg========================================================================================================================================================
 %bg {
-   border-radius: var(--border-radius-screen);
-   border: 1px solid var(--border-color-screen);
-   background: var(--bg-screen);
+   border-radius: var(--screen-border-radius);
+   border: 1px solid var(--screen-border-color);
+   background: var(--screen-bg);
 }
 //Tabs========================================================================================================================================================
 .main-tabs {
    transition: all 1s ease 0s;
    display: grid;
    grid-template-columns: repeat(3, 1fr);
-   border-radius: var(--border-radius-tabs);
-   background: var(--bg-tabs-list);
+   border-radius: var(--tabs-border-radius);
+   background: var(--tabs-bg);
    &__item {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       text-align: center;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       padding: 10px;
-      color: var(--text-tabs);
-      border-radius: var(--border-radius-tabs);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: var(--tabs-text-color);
+      border-radius: var(--tabs-border-radius);
       &:nth-child(1) {
          .tab1 & {
-            background: var(--bg-tab-active);
-            color: var(--text-tabs-active);
+            background: var(--tabs-active-bg);
+            color: var(--tabs-text-active-color);
          }
       }
       &:nth-child(2) {
          .tab2 & {
-            background: var(--bg-tab-active);
-            color: var(--text-tabs-active);
+            background: var(--tabs-active-bg);
+            color: var(--tabs-text-active-color);
          }
       }
       &:nth-child(3) {
          .tab3 & {
-            background: var(--bg-tab-active);
-            color: var(--text-tabs-active);
+            background: var(--tabs-active-bg);
+            color: var(--tabs-text-active-color);
          }
       }
    }
@@ -74,19 +74,18 @@
       display: block;
       width: 7px;
       height: 7px;
-      background: var(--bg-pagination);
+      background: var(--pagination-bg);
       transition: all 0.7s ease 0s;
    }
    .swiper-pagination-bullet.swiper-pagination-bullet-active {
-      background: var(--bg-pagination-active);
+      background: var(--pagination-bg-active);
       transition: all 0.7s ease 0s;
    }
 }
 //Buttons========================================================================================================================================================
 %btn {
-   font-family: var(--font-secondary);
-   background: var(--bg-button);
-   color: var(--text-button);
+   background: var(--button-bg);
+   color: var(--button-text-color);
    text-align: center;
    border-radius: 35px;
    text-align: center;
@@ -128,13 +127,13 @@
       z-index: -1;
       width: 100%;
       height: 100%;
-      max-width: var(--bg-img-size);
-      max-height: var(--bg-img-size);
+      max-width: var(--screen-img-bg-size);
+      max-height: var(--screen-img-bg-size);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: var(--bg-img);
+      background: var(--screen-img-bg);
       filter: blur(20px);
       transition: none;
    }
@@ -158,7 +157,7 @@
    .loaded-lang & {
       visibility: visible;
       opacity: 1;
-      background: var(--bg-loader);
+      background: var(--site-loader-bg);
    }
    .load-info & {
       transition: none;
@@ -274,5 +273,38 @@ img[data-ll-status]._lazy-loaded {
    & + .lazy-loader {
       opacity: 0;
       visibility: hidden;
+   }
+}
+
+//FormStatus========================================================================================================================================================
+.form-status {
+   flex: 1 1 auto;
+   display: none;
+   flex-direction: column;
+   gap: 20px;
+   &__content {
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+   }
+
+   &__icon {
+      width: 50px;
+      height: 50px;
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.5);
+   }
+
+   &__text {
+      font-size: 18px;
+      @extend %textLg;
+      text-align: center;
+   }
+
+   &__button {
+      @extend %btn;
    }
 }

@@ -1,7 +1,6 @@
-import axios from 'axios';
+import { API_URL, SITE_ID } from './config.js';
 
-export const API_URL = 'https://api.cardoapi.com/api/v2';
-export const SITE_ID = '424936';
+import axios from 'axios';
 
 export const $localApi = axios.create({
    baseURL: API_URL,

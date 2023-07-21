@@ -1,23 +1,18 @@
-import { $formApi, SITE_ID } from './api.js';
 import { loadInfoComplete, loadInfoStart } from './modules.js';
+
+import { $formApi } from './api.js';
+import { SITE_ID } from './config.js';
 
 const formScreen = document.getElementById('formScreen');
 const contactForm = document.getElementById('contactForm');
 const phoneInputEl = contactForm?.querySelector('[name="phone"]');
-const defaultBody = {
-   site_id: SITE_ID,
-   lang: window.localStorage.getItem('lang'),
-   type: 'feedback',
-   name: '',
-   email: '',
-   phone: '',
-   notes: '',
-};
+const tryAgainEl = document.getElementById('tryAgainBtn');
 
 contactForm?.addEventListener('submit', onSubmitForm);
 contactForm?.addEventListener('input', () => {
    [...contactForm.children].forEach((input) => removeInputError(input));
 });
+tryAgainEl?.addEventListener('click', returnForm);
 
 async function onSubmitForm(el) {
    el.preventDefault();
@@ -36,6 +31,15 @@ async function onSubmitForm(el) {
 }
 
 async function fetchForm(formData) {
+   const defaultBody = {
+      site_id: SITE_ID,
+      lang: window.localStorage.getItem('lang'),
+      type: 'feedback',
+      name: '',
+      email: '',
+      phone: '',
+      notes: '',
+   };
    return $formApi.post('', { ...defaultBody, ...formData });
 }
 
@@ -92,4 +96,8 @@ function removeInputError(el) {
 function dispatchFormStatus(status) {
    if (status === 'success') formScreen.classList.add('success-form');
    if (status === 'error') formScreen.classList.add('error-form');
+}
+
+function returnForm() {
+   formScreen.classList.remove('error-form');
 }
